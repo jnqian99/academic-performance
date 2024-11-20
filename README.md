@@ -55,13 +55,20 @@ EDA provided insight into feature distributions and relationships:
 Unsupervised clustering explored potential groupings of students:
 - **KMeans Clustering**: 
     ### Methodology and Results
-    To determine the optimal number of clusters (`k`), we calculated the **Silhouette Score** for values of `k` ranging from 2 to 10. The Silhouette Score evaluates how well each data point fits within its cluster relative to other clusters. As shown in the plot below, the highest Silhouette Score was achieved at `k=3`. This value was selected as the optimal number of clusters.
+    To determine the optimal number of clusters (`k`), we calculated the **Silhouette Score** for values of `k` ranging from 2 to 10. As shown in the plot below, the highest Silhouette Score was achieved at `k=3`. This value was selected as the optimal number of clusters.
+    
+    For k=4 and beyond, the Silhouette Score dropped significantly to some very low value (~0.09) suggests that the clusters become less meaningful, possibly due to splitting existing clusters or introducing noise. The Silhouette Score supports the choice of k=3 as the optimal number of clusters. However, the relatively low overall scores (maximum ~0.25) suggest that the dataset does not form highly distinct clusters, which might result from overlapping features or noise.
 
     ![Silhouette Score](results/clustering_silhouette_kmeans.png)
 
-    After selecting `k=3`, we applied K-Means clustering to the dataset. To visualize the clusters, we reduced the data to three dimensions using **Principal Component Analysis (PCA)**. The resulting clusters are displayed in the 3D scatter plot below. Each color represents a distinct cluster.
+    After selecting `k=3`, we applied K-Means clustering to the dataset. To visualize the clusters, we reduced the data to **3** dimensions using **Principal Component Analysis (PCA)**. The resulting clusters are displayed in the 3D scatter plot below. Each color represents a distinct cluster.
 
     ![K-Means Clustering](results/clustering_3d_kmeans.png)
+
+    The 3D scatter plot of KMeans clusters in the PCA-reduced space shows three distinct groups:
+	-	One cluster is densely packed, while the other two are more dispersed.
+	-	The separation between clusters is visible, but some overlap exists, particularly between two clusters.
+	-	This indicates that while the algorithm can group the data meaningfully, the feature space may not fully separate the underlying groups.
 
     We also compared the clusters to the actual target labels (dropout, not dropout) by coloring the points based on their true categories. This revealed some overlap between the clusters and target labels, as shown below:
 
