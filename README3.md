@@ -125,6 +125,16 @@ During hyperparameter searching for the classifiers, we generally use roc-auc in
 
 The prediction is generated as a probability which can be determined by a probability threshold value whether the sample belongs to the positive or negative class. This threshold value constitutes another hyperparameter that should be searched before predicting the testing data. During this hyperparameter search, 80% of the training data was used for training the model and the rest of the training data was used as the validation data.
 
+The performance of the classifiers was evaluated using the recall, accuracy, precision, and F1-score. The confusion matrix was also generated to show the number of True Positive, False Positive, True Negative, and False Negative samples. The ROC curve was also generated to show the trade-off between the True Positive Rate and False Positive Rate. The scores of the classifiers were compared to determine the best classifier for this task as follows:
+
+| Metric      | Kernel SVM | Random Forest | K-NN   |
+|-------------|------------|---------------|--------|
+| Recall      | 0.9177     | 0.8955        | 0.8449 |
+| Accuracy    | 0.7853     | 0.7548        | 0.7649 |
+| Precision   | 0.6387     | 0.6059        | 0.6267 |
+| F1-Score    | 0.7532     | 0.7228        | 0.7196 |
+| ROC-AUC     | 0.9134     | 0.9078        | 0.8763 |
+
 
 ### Support Vector Machine (SVM):
 For SVM, the class_weight parameter is chosen to be “balanced” to increase the class weight for the positive class (Dropout) based on its corresponding sample frequency relative to the negative class (Enrolled or Graduate). 
@@ -217,12 +227,11 @@ It is important to determine what scoring function to use in a data mining task 
 
 ### Challenges and Limitations
 
-
-
+The dataset we used is relatively small and came from a country (Portugal) with a specific education system. The results we got may not be generalizable to other countries or regions. We did not do any data augmentation or use any external data to improve the model performance. The dataset is also imbalanced with the majority of the students not dropping out so that may affect the model performance. We did not create any new features or use any advanced feature engineering techniques to improve the model performance. 
 
 ### Future Enhancements
 
-
+We can incorporate more data from different countries and regions to improve the model performance. We can also use data augmentation techniques to improve the model performance. We may try more advanced data classification techniques such as deep learning to improve the model performance and/or use more advanced feature engineering techniques to improve the model performance. 
 
 
 ---
