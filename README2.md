@@ -30,18 +30,19 @@ Each section in this README details the tasks, results, visualizations, and code
 
 The original dataset contains all numeric values, as categorical features have been mapped into numbers. For instance, the marital status was mapped as follows:
 | Numeric Value | Category          |
-|---------------|-------------------|
+|:-------------:|-------------------|
 | 1             | Single            |
 | 2             | Married           |
 | 3             | Widow             |
 | 4             | Divorced          |
 | 5             | Facto Union       |
 | 6             | Legally Separated |
+
 To make the data easier to interpret in visualizations, we converted these numeric values back to their string labels before plotting.
 
 EDA provided comprehensive insights into the dataset:
 - **Data Overview**: To better understand the dataset, the table below provides an overview of the dataset including feature names, data type, number of missing values and number of unique values:
-| Feature Name                                   | Data Type | Number of Missing values | Number of Unique Values |               Summary Statist       ||
+| Feature Name                                   | Data Type | Number of Missing values | Number of Unique Values |               Summary Statist      |||
 |------------------------------------------------|-----------|:------------------------:|:-----------------------:|:------------------:|:------:|:------:|
 |                                                |           |                          |                         |         Min        |  Mean  |   Max  |
 | Marital status                                 | object    |             0            |            6            |                    |        |        |
