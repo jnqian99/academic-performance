@@ -100,7 +100,9 @@ We applied three Outlier detection methods to the scaled and one-hot encoded dat
 
 The results show that Elliptic Envelope method identified outliers are better seperated from the non-outliers it identiried compared to the other two methods. The Local Outlier Factor method and Isolation Forest method identified outliers seems more mixed together with their respective non-outliers. Thus the Elliptic Envelope method seems to be the most promising method for outlier detection in this dataset.
 
-We then inspected all the outliers identified by the Elliptic Envelope method and found no evidence that these outliers are incorrect data. These outliers may be distant from the majority of the data points but they are not necessarily noise or irrelevant data points, and these data points may still contain important information for the later tasks such as classification or clustering. Thus we decided to keep these outliers in the dataset for further analysis.
+We then inspected all the outliers identified by the Elliptic Envelope method by inspecting individual student rows and found no evidence that these outliers are incorrectly collected data. 
+Also, some of these outliers are actually quite close to the majority of the data points on the PCA-reduced space as shown in the scatter plot above.
+Other outliers may be a bit distant from the majority of the data points but they are not necessarily noise or irrelevant data points, and these data points may still contain important information for the later tasks such as classification or clustering. Thus we decided to keep all these outliers in the dataset for further analysis.
 
 > Check [4_outlier.ipynb](./notebooks/4_outlier.ipynb) for the outlier detection process and visualizations.
 
