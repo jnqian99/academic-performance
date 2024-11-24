@@ -41,7 +41,7 @@ The original dataset contains all numeric values, as categorical features have b
 To make the data easier to interpret in visualizations, we converted these numeric values back to their string labels before plotting.
 
 EDA provided comprehensive insights into the dataset:
-- **Data Overview**: To better understand the dataset, the table below provides an overview of the dataset including feature names, data type, number of missing values and number of unique values:
+- **Data Overview**: To get basic information about the dataset, the table below provides an overview of the dataset including feature names, data type, number of missing values, number of unique values and summary of statistics for numerical features:
 <table><thead>
   <tr>
     <th rowspan="2">Feature Name</th>
@@ -391,10 +391,25 @@ EDA provided comprehensive insights into the dataset:
   </tr>
 </tbody></table>
 
-- **Distribution Analysis**: Distribution analysis revealed skewness in grades and enrollment status, suggesting early intervention opportunities.
-- **Correlation Heatmap**: Academic features, such as grades and credited units, showed strong correlations with student outcomes.
-- **Cluster Patterns**: Initial analysis revealed separable groups based on academic performance, hinting at distinct student types.
+- **Distribution Analysis**: Using distribution analysis, we could understand how to handle the dataset during preprocess. For example, we can identify features with skewed distribution and notice these features need data transformation. To focus the analysis, target variable and a feature with the highest correlation to the target variable is selected for visulaization.
 
+  ![EDA Target Distribution](results/eda_target_dist.png)
+
+  The target variable consists of three categories: Dropout, Graduate, and Enrolled. Since our focus is on predicting student dropout, it can be converted to a binary form.
+
+  
+  ![EDA Feature Histogram](results/eda_feature_hist.png)
+
+  The distribution of this feature is negative skewed and this can be handeled by normalization.
+
+- **Correlation of Features with Target**: To understand the relationship between the features and the target variable, we computed the correlation of each feature with the target. For numerical features, we used the point-biserial correlation coefficient and for categorical features, we used Cramer's V.
+    ![EDA Correlation with Target](results/eda_corr_target.png)
+
+Academic features, such as grades and approved units, showed strong correlations with student outcomes.
+- **Correlation among Features**: To understand the relationships between the features, we calculated the pairwise correlation. For numerical-numerical features pair, we used Pearson's correlation, for categorical-categorical features pair, we used Cramer's V and for numerical-categorical features pair, we converted categorical feature into binary form and used point-biserial.
+    ![EDA Correlation among Features](results/eda_corr_features.png)
+
+'Course' and 'Daytime/evening attendance' pair and 'Nationality' and 'International' pair show very high positive correlation. Also it shows that academic features are strongly associated.
 
 > See [2_eda.ipynb](./2_eda.ipynb) for visualizations and analysis.
 
@@ -403,7 +418,7 @@ EDA provided comprehensive insights into the dataset:
 
 
 Preprocessing ensures data quality for reliable analysis and modeling. Key steps included:
-- **Missing Value Handling**: Imputation of numerical values with medians and filling categorical values with placeholders.
+- **Missing Value Handling**: During EDA, it was observed that all missing values had already been handled in the original data by replacing them with placeholders such as "Unknown" or "(blank)".
 - **Encoding**: Categorical features were label-encoded (low cardinality) or one-hot encoded (high cardinality, e.g., Nationality).
 - **Normalization**: Numerical academic features were normalized to facilitate clustering and improve model performance.
 
