@@ -42,46 +42,363 @@ To make the data easier to interpret in visualizations, we converted these numer
 
 EDA provided comprehensive insights into the dataset:
 - **Data Overview**: To better understand the dataset, the table below provides an overview of the dataset including feature names, data type, number of missing values and number of unique values:
-| Feature Name                                   | Data Type | Number of Missing values | Number of Unique Values |               Summary Statist      |||
-|------------------------------------------------|-----------|:------------------------:|:-----------------------:|:------------------:|:------:|:------:|
-|                                                |           |                          |                         |         Min        |  Mean  |   Max  |
-| Marital status                                 | object    |             0            |            6            |                    |        |        |
-| Application mode                               | object    |             0            |            18           |                    |        |        |
-| Application order                              | int64     |             0            |            8            |          0         | 1.7278 |    9   |
-| Course                                         | object    |             0            |            17           |                    |        |        |
-| Daytime/evening attendance                     | object    |             0            |            2            |                    |        |        |
-| Previous qualification                         | object    |             0            |            17           |                    |        |        |
-| Previous qualification (grade)                 | float64   |             0            |           101           |         95         | 132.61 |   190  |
-| Nationality                                    | object    |             0            |            21           |                    |        |        |
-| Mother's qualification                         | object    |             0            |            29           |                    |        |        |
-| Father's qualification                         | object    |             0            |            34           |                    |        |        |
-| Mother's occupation                            | object    |             0            |            32           |                    |        |        |
-| Father's occupation                            | object    |             0            |            46           |                    |        |        |
-| Admission grade                                | float64   |             0            |           620           |         95         | 126.98 |   190  |
-| Displaced                                      | object    |             0            |            2            |                    |        |        |
-| Educational special needs                      | object    |             0            |            2            |                    |        |        |
-| Debtor                                         | object    |             0            |            2            |                    |        |        |
-| Tuition fees up to date                        | object    |             0            |            2            |                    |        |        |
-| Gender                                         | object    |             0            |            2            |                    |        |        |
-| Scholarship holder                             | object    |             0            |            2            |                    |        |        |
-| Age at enrollment                              | int64     |             0            |            46           |         17         | 23.265 |   70   |
-| International                                  | object    |             0            |            2            |                    |        |        |
-| Curricular units 1st sem (credited)            | int64     |             0            |            21           |          0         | 0.7100 |   20   |
-| Curricular units 1st sem (enrolled)            | int64     |             0            |            23           |          0         | 6.2706 |   26   |
-| Curricular units 1st sem (evaluations)         | int64     |             0            |            35           |          0         | 8.2991 |   45   |
-| Curricular units 1st sem (approved)            | int64     |             0            |            23           |          0         | 4.7066 |   26   |
-| Curricular units 1st sem (grade)               | float64   |             0            |           805           |          0         | 10.641 | 18.875 |
-| Curricular units 1st sem (without evaluations) | int64     |             0            |            11           |          0         | 0.1377 |   12   |
-| Curricular units 2nd sem (credited)            | int64     |             0            |            19           |          0         | 0.5418 |   19   |
-| Curricular units 2nd sem (enrolled)            | int64     |             0            |            22           |          0         | 6.2321 |   23   |
-| Curricular units 2nd sem (evaluations)         | int64     |             0            |            30           |          0         | 8.0633 |   33   |
-| Curricular units 2nd sem (approved)            | int64     |             0            |            20           |          0         | 4.4358 |   20   |
-| Curricular units 2nd sem (grade)               | float64   |             0            |           786           |          0         | 10.230 | 18.571 |
-| Curricular units 2nd sem (without evaluations) | int64     |             0            |            10           |          0         | 0.1503 |   12   |
-| Unemployment rate                              | float64   |             0            |            10           |       7.6000       | 11.566 | 16.200 |
-| Inflation rate                                 | float64   |             0            |            9            |       -0.8000      | 1.2280 | 3.7000 |
-| GDP                                            | float64   |             0            |            10           |       -4.0600      | 0.0020 | 3.5100 |
-| Target                                         | object    |             0            |            3            |                    |        |        |
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg"><thead>
+  <tr>
+    <th class="tg-0pky" rowspan="2">Feature Name</th>
+    <th class="tg-0pky" rowspan="2">Data Type</th>
+    <th class="tg-c3ow" rowspan="2">Number of Missing values</th>
+    <th class="tg-c3ow" rowspan="2">Number of Unique Values</th>
+    <th class="tg-c3ow" colspan="3">Summary Statistics</th>
+  </tr>
+  <tr>
+    <th class="tg-c3ow">Min</th>
+    <th class="tg-c3ow">Mean</th>
+    <th class="tg-c3ow">Max</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td class="tg-0pky">Marital status</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">6</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Application mode</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">18</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Application order</td>
+    <td class="tg-0pky">int64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">8</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">1.7278</td>
+    <td class="tg-c3ow">9</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Course</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">17</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Daytime/evening attendance</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">2</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Previous qualification</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">17</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Previous qualification (grade)</td>
+    <td class="tg-0pky">float64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">101</td>
+    <td class="tg-c3ow">95</td>
+    <td class="tg-c3ow">132.61</td>
+    <td class="tg-c3ow">190</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Nationality</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">21</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Mother's qualification</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">29</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Father's qualification</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">34</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Mother's occupation</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">32</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Father's occupation</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">46</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Admission grade</td>
+    <td class="tg-0pky">float64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">620</td>
+    <td class="tg-c3ow">95</td>
+    <td class="tg-c3ow">126.98</td>
+    <td class="tg-c3ow">190</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Displaced</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">2</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Educational special needs</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">2</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Debtor</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">2</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Tuition fees up to date</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">2</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Gender</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">2</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Scholarship holder</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">2</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Age at enrollment</td>
+    <td class="tg-0pky">int64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">46</td>
+    <td class="tg-c3ow">17</td>
+    <td class="tg-c3ow">23.265</td>
+    <td class="tg-c3ow">70</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">International</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">2</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Curricular units 1st sem (credited)</td>
+    <td class="tg-0pky">int64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">21</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">0.7100</td>
+    <td class="tg-c3ow">20</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Curricular units 1st sem (enrolled)</td>
+    <td class="tg-0pky">int64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">23</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">6.2706</td>
+    <td class="tg-c3ow">26</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Curricular units 1st sem (evaluations)</td>
+    <td class="tg-0pky">int64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">35</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">8.2991</td>
+    <td class="tg-c3ow">45</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Curricular units 1st sem (approved)</td>
+    <td class="tg-0pky">int64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">23</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">4.7066</td>
+    <td class="tg-c3ow">26</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Curricular units 1st sem (grade)</td>
+    <td class="tg-0pky">float64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">805</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">10.641</td>
+    <td class="tg-c3ow">18.875</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Curricular units 1st sem (without evaluations)</td>
+    <td class="tg-0pky">int64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">11</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">0.1377</td>
+    <td class="tg-c3ow">12</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Curricular units 2nd sem (credited)</td>
+    <td class="tg-0pky">int64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">19</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">0.5418</td>
+    <td class="tg-c3ow">19</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Curricular units 2nd sem (enrolled)</td>
+    <td class="tg-0pky">int64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">22</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">6.2321</td>
+    <td class="tg-c3ow">23</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Curricular units 2nd sem (evaluations)</td>
+    <td class="tg-0pky">int64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">30</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">8.0633</td>
+    <td class="tg-c3ow">33</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Curricular units 2nd sem (approved)</td>
+    <td class="tg-0pky">int64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">20</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">4.4358</td>
+    <td class="tg-c3ow">20</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Curricular units 2nd sem (grade)</td>
+    <td class="tg-0pky">float64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">786</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">10.230</td>
+    <td class="tg-c3ow">18.571</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Curricular units 2nd sem (without evaluations)</td>
+    <td class="tg-0pky">int64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">10</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">0.1503</td>
+    <td class="tg-c3ow">12</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Unemployment rate</td>
+    <td class="tg-0pky">float64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">10</td>
+    <td class="tg-c3ow">7.6</td>
+    <td class="tg-c3ow">11.566</td>
+    <td class="tg-c3ow">16.2</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Inflation rate</td>
+    <td class="tg-0pky">float64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">9</td>
+    <td class="tg-c3ow">-0.8</td>
+    <td class="tg-c3ow">1.2280</td>
+    <td class="tg-c3ow">3.7</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">GDP</td>
+    <td class="tg-0pky">float64</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">10</td>
+    <td class="tg-c3ow">-4.06</td>
+    <td class="tg-c3ow"><span style="font-weight:400;font-style:normal">0.0020</span></td>
+    <td class="tg-c3ow">3.51</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Target</td>
+    <td class="tg-0pky">object</td>
+    <td class="tg-c3ow">0</td>
+    <td class="tg-c3ow">3</td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+    <td class="tg-c3ow"></td>
+  </tr>
+</tbody></table>
 - **Distribution Analysis**: Distribution analysis revealed skewness in grades and enrollment status, suggesting early intervention opportunities.
 - **Correlation Heatmap**: Academic features, such as grades and credited units, showed strong correlations with student outcomes.
 - **Cluster Patterns**: Initial analysis revealed separable groups based on academic performance, hinting at distinct student types.
