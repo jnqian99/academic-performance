@@ -391,25 +391,27 @@ EDA provided comprehensive insights into the dataset:
   </tr>
 </tbody></table>
 
-- **Distribution Analysis**: Using distribution analysis, we could understand how to handle the dataset during preprocess. For example, we can identify features with skewed distribution and notice these features need data transformation. To focus the analysis, target variable and a feature with the highest correlation to the target variable is selected for visulaization.
+- **Distribution Analysis**: Using distribution analysis, we could understand how to handle the dataset during preprocess. For example, we can identify features with skewed distribution and notice these features need data transformation. To focus the analysis, target variable and a feature with the highest correlation to the target variable are selected for visulaization.
 
   ![EDA Target Distribution](results/eda_target_dist.png)
 
   The target variable consists of three categories: Dropout, Graduate, and Enrolled. Since our focus is on predicting student dropout, it can be converted to a binary form.
 
-  
   ![EDA Feature Histogram](results/eda_feature_hist.png)
 
   The distribution of this feature is negative skewed and this can be handeled by normalization.
 
 - **Correlation of Features with Target**: To understand the relationship between the features and the target variable, we computed the correlation of each feature with the target. For numerical features, we used the point-biserial correlation coefficient and for categorical features, we used Cramer's V.
+
     ![EDA Correlation with Target](results/eda_corr_target.png)
 
-Academic features, such as grades and approved units, showed strong correlations with student outcomes.
+    Academic features, such as grades and approved units, showed strong correlations with student outcomes.
+
 - **Correlation among Features**: To understand the relationships between the features, we calculated the pairwise correlation. For numerical-numerical features pair, we used Pearson's correlation, for categorical-categorical features pair, we used Cramer's V and for numerical-categorical features pair, we converted categorical feature into binary form and used point-biserial.
+
     ![EDA Correlation among Features](results/eda_corr_features.png)
 
-'Course' and 'Daytime/evening attendance' pair and 'Nationality' and 'International' pair show very high positive correlation. Also it shows that academic features are strongly associated.
+    'Course' and 'Daytime/evening attendance' pair and 'Nationality' and 'International' pair show very high positive correlation. Also it shows that academic features are strongly associated.
 
 > See [2_eda.ipynb](./2_eda.ipynb) for visualizations and analysis.
 
