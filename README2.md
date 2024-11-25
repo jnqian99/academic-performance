@@ -44,21 +44,25 @@ EDA provided comprehensive insights into the dataset:
 - **Data Overview**: To get basic information about the dataset, the table below provides an overview of the dataset including feature names, data type, number of missing values, number of unique values and summary of statistics for numerical features:
 <table><thead>
   <tr>
-    <th rowspan="2">Feature Name</th>
-    <th rowspan="2">Data Type</th>
-    <th rowspan="2">Number of Missing values</th>
-    <th rowspan="2">Number of Unique Values</th>
+    <th>Feature Name</th>
+    <th>Data Type</th>
+    <th>Number of Missing values</th>
+    <th>Number of Unique Values</th>
     <th colspan="3">Summary Statistics</th>
-  </tr>
-  <tr>
-    <th>Min</th>
-    <th>Mean</th>
-    <th>Max</th>
   </tr></thead>
 <tbody>
   <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>Min</td>
+    <td>Mean</td>
+    <td>Max</td>
+  </tr>
+  <tr>
     <td>Marital status</td>
-    <td>object</td>
+    <td>category</td>
     <td>0</td>
     <td>6</td>
     <td></td>
@@ -67,7 +71,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Application mode</td>
-    <td>object</td>
+    <td>category</td>
     <td>0</td>
     <td>18</td>
     <td></td>
@@ -76,16 +80,16 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Application order</td>
-    <td>int64</td>
+    <td>ordinal</td>
     <td>0</td>
     <td>8</td>
-    <td>0</td>
-    <td>1.7278</td>
-    <td>9</td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
   <tr>
     <td>Course</td>
-    <td>object</td>
+    <td>category</td>
     <td>0</td>
     <td>17</td>
     <td></td>
@@ -94,7 +98,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Daytime/evening attendance</td>
-    <td>object</td>
+    <td>bool</td>
     <td>0</td>
     <td>2</td>
     <td></td>
@@ -103,7 +107,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Previous qualification</td>
-    <td>object</td>
+    <td>category</td>
     <td>0</td>
     <td>17</td>
     <td></td>
@@ -112,7 +116,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Previous qualification (grade)</td>
-    <td>float64</td>
+    <td>continuous</td>
     <td>0</td>
     <td>101</td>
     <td>95</td>
@@ -121,7 +125,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Nationality</td>
-    <td>object</td>
+    <td>category</td>
     <td>0</td>
     <td>21</td>
     <td></td>
@@ -130,7 +134,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Mother's qualification</td>
-    <td>object</td>
+    <td>category</td>
     <td>0</td>
     <td>29</td>
     <td></td>
@@ -139,7 +143,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Father's qualification</td>
-    <td>object</td>
+    <td>category</td>
     <td>0</td>
     <td>34</td>
     <td></td>
@@ -148,7 +152,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Mother's occupation</td>
-    <td>object</td>
+    <td>category</td>
     <td>0</td>
     <td>32</td>
     <td></td>
@@ -157,7 +161,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Father's occupation</td>
-    <td>object</td>
+    <td>category</td>
     <td>0</td>
     <td>46</td>
     <td></td>
@@ -166,7 +170,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Admission grade</td>
-    <td>float64</td>
+    <td>continuous</td>
     <td>0</td>
     <td>620</td>
     <td>95</td>
@@ -175,7 +179,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Displaced</td>
-    <td>object</td>
+    <td>bool</td>
     <td>0</td>
     <td>2</td>
     <td></td>
@@ -184,7 +188,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Educational special needs</td>
-    <td>object</td>
+    <td>bool</td>
     <td>0</td>
     <td>2</td>
     <td></td>
@@ -193,7 +197,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Debtor</td>
-    <td>object</td>
+    <td>bool</td>
     <td>0</td>
     <td>2</td>
     <td></td>
@@ -202,7 +206,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Tuition fees up to date</td>
-    <td>object</td>
+    <td>bool</td>
     <td>0</td>
     <td>2</td>
     <td></td>
@@ -211,7 +215,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Gender</td>
-    <td>object</td>
+    <td>bool</td>
     <td>0</td>
     <td>2</td>
     <td></td>
@@ -220,7 +224,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Scholarship holder</td>
-    <td>object</td>
+    <td>bool</td>
     <td>0</td>
     <td>2</td>
     <td></td>
@@ -229,7 +233,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Age at enrollment</td>
-    <td>int64</td>
+    <td>int</td>
     <td>0</td>
     <td>46</td>
     <td>17</td>
@@ -238,7 +242,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>International</td>
-    <td>object</td>
+    <td>category</td>
     <td>0</td>
     <td>2</td>
     <td></td>
@@ -247,7 +251,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Curricular units 1st sem (credited)</td>
-    <td>int64</td>
+    <td>int</td>
     <td>0</td>
     <td>21</td>
     <td>0</td>
@@ -256,7 +260,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Curricular units 1st sem (enrolled)</td>
-    <td>int64</td>
+    <td>int</td>
     <td>0</td>
     <td>23</td>
     <td>0</td>
@@ -265,7 +269,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Curricular units 1st sem (evaluations)</td>
-    <td>int64</td>
+    <td>int</td>
     <td>0</td>
     <td>35</td>
     <td>0</td>
@@ -274,7 +278,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Curricular units 1st sem (approved)</td>
-    <td>int64</td>
+    <td>int</td>
     <td>0</td>
     <td>23</td>
     <td>0</td>
@@ -283,7 +287,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Curricular units 1st sem (grade)</td>
-    <td>float64</td>
+    <td>continuous</td>
     <td>0</td>
     <td>805</td>
     <td>0</td>
@@ -292,7 +296,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Curricular units 1st sem (without evaluations)</td>
-    <td>int64</td>
+    <td>int</td>
     <td>0</td>
     <td>11</td>
     <td>0</td>
@@ -301,7 +305,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Curricular units 2nd sem (credited)</td>
-    <td>int64</td>
+    <td>int</td>
     <td>0</td>
     <td>19</td>
     <td>0</td>
@@ -310,7 +314,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Curricular units 2nd sem (enrolled)</td>
-    <td>int64</td>
+    <td>int</td>
     <td>0</td>
     <td>22</td>
     <td>0</td>
@@ -319,7 +323,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Curricular units 2nd sem (evaluations)</td>
-    <td>int64</td>
+    <td>int</td>
     <td>0</td>
     <td>30</td>
     <td>0</td>
@@ -328,7 +332,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Curricular units 2nd sem (approved)</td>
-    <td>int64</td>
+    <td>int</td>
     <td>0</td>
     <td>20</td>
     <td>0</td>
@@ -337,7 +341,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Curricular units 2nd sem (grade)</td>
-    <td>float64</td>
+    <td>continuous</td>
     <td>0</td>
     <td>786</td>
     <td>0</td>
@@ -346,7 +350,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Curricular units 2nd sem (without evaluations)</td>
-    <td>int64</td>
+    <td>int</td>
     <td>0</td>
     <td>10</td>
     <td>0</td>
@@ -355,7 +359,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Unemployment rate</td>
-    <td>float64</td>
+    <td>continuous</td>
     <td>0</td>
     <td>10</td>
     <td>7.6</td>
@@ -364,7 +368,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Inflation rate</td>
-    <td>float64</td>
+    <td>continuous</td>
     <td>0</td>
     <td>9</td>
     <td>-0.8</td>
@@ -373,7 +377,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>GDP</td>
-    <td>float64</td>
+    <td>continuous</td>
     <td>0</td>
     <td>10</td>
     <td>-4.06</td>
@@ -382,7 +386,7 @@ EDA provided comprehensive insights into the dataset:
   </tr>
   <tr>
     <td>Target</td>
-    <td>object</td>
+    <td>category</td>
     <td>0</td>
     <td>3</td>
     <td></td>
@@ -391,15 +395,19 @@ EDA provided comprehensive insights into the dataset:
   </tr>
 </tbody></table>
 
-- **Distribution Analysis**: Using distribution analysis, we could understand how to handle the dataset during preprocess. For example, we can identify features with skewed distribution and notice these features need data transformation. To focus the analysis, target variable and a feature with the highest correlation to the target variable are selected for visulaization.
+- **Distribution Analysis**: Using distribution analysis, we could understand how to handle the dataset during preprocess. For example, we can identify features with skewed distribution and notice these features need data transformation. To focus the analysis, target variable, a numerical feature and a categorical feature are selected for visulaization.
 
-  ![EDA Target Distribution](results/eda_target_dist.png)
+  ![EDA Target Distribution](results/eda_dist_target.png)
 
-  The target variable consists of three categories: Dropout, Graduate, and Enrolled. Since our focus is on predicting student dropout, it can be converted to a binary form.
+  The original target variable consists of three categories: Dropout, Graduate, and Enrolled. Since our focus is on predicting student dropout, it is converted to a binary form. From the analysis of the target variable, it showed that the distribution of Dropout is 32.12% and the distribution of Not Dropout is 67.88%. This indicates an imbalanced distribution and data augmentation is needed.
 
-  ![EDA Feature Histogram](results/eda_feature_hist.png)
+  ![EDA Numerical Distribution](results/eda_dist_num.png)
 
-  The distribution of this feature is negative skewed and this can be handeled by normalization.
+  The distribution of this feature shows that many students got 0 for the grade. It is negative skewed and this can be handeled by normalization.
+
+  ![EDA Categorical Distribution](results/eda_dist_cat.png)
+
+  The distribution shows a significant imbalance between categories which reflects the real-world situation. 
 
 - **Correlation of Features with Target**: To understand the relationship between the features and the target variable, we computed the correlation of each feature with the target. For numerical features, we used the point-biserial correlation coefficient and for categorical features, we used Cramer's V.
 
