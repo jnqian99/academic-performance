@@ -91,6 +91,7 @@ Unsupervised clustering explored potential groupings of students:
     - The highest **Silhouette Score** of **0.23** was observed at **k=4**.
     - Scores for **k=2** and **k=3** were also relatively high, which aligns with the binary nature of the dataset (dropout vs. not dropout).
     - Beyond `k=4`, the scores drop significantly, indicating that higher cluster values might introduce noise or split meaningful groupings.
+    - Overall, the relatively low scores (maximum ~0.25) suggest that the dataset does not form highly distinct clusters, which might result from overlapping features or noise.
 
     After selecting **k=4**, Hierarchical Clustering was applied to the dataset. The data was reduced to **3 dimensions** using **Principal Component Analysis (PCA)** for visualization. Two 3D scatter plots were generated to display the clusters from different viewpoints:
 
@@ -101,24 +102,87 @@ Unsupervised clustering explored potential groupings of students:
     The 3D scatter plots reveal the following:
     1. Four distinct clusters are visible, with varying densities and overlaps.
     2. Overlaps between clusters suggest some complexity in the dataset that hierarchical clustering struggles to fully separate.
-    3. Comparing these clusters with true labels (dropout vs. not dropout) reveals that while some alignment exists, significant overlaps remain.
 
     To analyze the relationship between clusters and the actual target labels, the clusters were visualized with true labels in a separate plot:
 
     ![Clusters and True Labels](results/clustering_3d_target_agg.png)
 
     #### Observations
-    1. **Binary Nature of the Dataset**: While `k=4` maximized the Silhouette Score, using **k=2** might better align with the binary classification of dropout vs. not dropout.
-    2. **Granularity**: Higher values of `k` (e.g., `k=4`) provide a more granular view but might introduce noise or split meaningful groupings.
-    3. **Alignment with True Labels**: Overlaps between clusters and true labels suggest that hierarchical clustering captures general groupings but does not fully separate the classes.
+    1. Comparing these clusters with true labels (dropout vs. not dropout) reveals that while some alignment exists, significant overlaps remain.
+    3. Overlaps between clusters and true labels suggest that hierarchical clustering captures general groupings but does not separate the classes well.
 
-    #### Conclusion
-    - **Best k**: While **k=4** achieves the highest Silhouette Score, **k=2** aligns better with the binary nature of the dataset and simplifies interpretation.
-    - **Clustering Quality**: Hierarchical clustering provides moderate separation, but overlaps suggest the need for feature engineering or alternative clustering methods.
-    - **Future Directions**: Refining features or experimenting with different distance metrics may improve clustering performance.
+- ### DBSCAN:
 
-- **DBSCAN**: 
+    #### -> Methodology and Results
 
+    To determine the optimal `eps` for DBSCAN, a **k-distance graph** was used. The sorted distances to the 5th nearest neighbor were plotted, and the elbow point was identified based on the curvature of the graph. The resulting optimal `eps` value was found to be **4.35**.
+
+    ![K-Distance Graph](results/clustering_kdis_dbscan.png)
+
+    #### ->Evaluation of DBSCAN with Different `eps` Values
+
+    DBSCAN was evaluated with various `eps` values ranging from **4.0** to **5.5** (based on the best eps get from k-distances). For each `eps`, the following metrics were calculated:
+    - **Number of clusters** formed (excluding noise).
+    - **Number of noise points**.
+    - **Silhouette Score** to evaluate clustering quality.
+
+    | `eps` | Number of Clusters | Noise Points | Silhouette Score |
+    |-------|--------------------|--------------|------------------|
+    | 4.0   | 7                  | 300          | 0.2667           |
+    | 4.35  | 5                  | 169          | 0.2959           |
+    | 5.0   | 3                  | 53           | 0.3454           |
+    | 5.5   | 2                  | 20           | 0.5642           |
+
+    ![Silhouette Score vs eps](results/clustering_silhouette_DBSCAN.png)
+
+    - The highest **Silhouette Score** of **0.5642** was achieved at `eps=5.5`, but this configuration resulted in only 2 clusters, which may oversimplify the data.
+    - At **eps=4.35**, a moderate Silhouette Score of **0.2959** was achieved with **5 clusters**, which balances granularity and clustering quality.
+
+    #### Visualizing Clusters
+
+    Using **eps=4.35**, DBSCAN was applied to the dataset. Two 3D scatter plots were generated to visualize the clusters from different perspectives, with noise points (cluster `-1`) clearly marked as 'x':
+
+    ![DBSCAN Clustering](results/clustering_3d_dbscan.png)
+
+    The relationship between DBSCAN clusters and true target labels (dropout vs. not dropout) was also visualized. Each cluster was annotated with both its ID and the corresponding target label:
+
+    ![Clusters and True Labels](results/clustering_3d_target_dbscan_views_with_noise.png)
+
+    #### Observations
+
+    1. **Dominance of One Main Cluster**:
+    - While DBSCAN identified 5 clusters, **most points are concentrated in one main cluster**, with the remaining clusters sparsely distributed.
+    - This suggests that DBSCAN did not effectively separate the dataset into meaningful subgroups.
+
+    2. **Silhouette Score**:
+    - The Silhouette Score for `eps=4.35` was **0.2959**, which indicates poor clustering performance.
+    - Low Silhouette Scores suggest that the clusters overlap significantly or are not well-separated.
+
+    3. **Comparison with True Labels**:
+    - When comparing the clusters with the true labels (dropout vs. not dropout), the main cluster contains a **mix of both dropout and non-dropout points**.
+    - This lack of separation in the main cluster suggests that DBSCAN failed to distinguish between the two classes effectively.
+
+### Conclusion of Clustering
+
+The clustering analysis using KMeans, Hierarchical Clustering, and DBSCAN revealed insights into the dataset's structure, but all methods faced challenges due to overlapping features and noise, as evidenced by relatively low Silhouette Scores.
+
+- **Clustering Performance**:
+  - Across all methods, the Silhouette Scores remained below **0.3**, indicating weak separation of clusters. 
+  - KMeans and Hierarchical Clustering performed similarly, with moderate separation of clusters but noticeable overlaps with the true target labels (dropout vs. not dropout).
+  - DBSCAN struggled the most, as it grouped most data points into a single dominant cluster and did not effectively separate dropout and non-dropout points.
+
+- **Noise and Overlap**:
+  - DBSCAN identified noise points effectively but failed to cluster the remaining data meaningfully.
+  - KMeans and Hierarchical Clustering produced clusters that overlapped significantly, suggesting that the features do not sufficiently separate the two target groups.
+
+- **Comparison**:
+  - **KMeans** is the most interpretable method and aligned best with the binary nature of the dataset (dropout vs. not dropout) when `k=2` was used.
+  - **Hierarchical Clustering** provided insights into potential subgroup relationships but did not outperform KMeans.
+  - **DBSCAN**, while effective in identifying noise, struggled with meaningful clustering for this dataset.
+
+#### Final Takeaways
+- The results indicate that the dataset is not inherently well-suited for clustering due to overlapping features and noise. 
+- The dataset's high dimensionality and categorical features may hinder the effectiveness of clustering. 
 
 > Refer to [3_cluster.ipynb](./3_cluster.ipynb) for detailed clustering steps and visuals.
 
@@ -136,10 +200,57 @@ Outlier detection was applied to highlight atypical students:
 
 ## 5. Feature Selection
 
+### Methodology
 
-Feature selection was applied to improve model efficiency and accuracy:
-- **Recursive Feature Elimination (RFE)**: Used to rank features, helping to retain those with the strongest predictive power.
-- **Random Forest Feature Importance**: Provided insights into feature relevance, with academic performance metrics emerging as significant predictors.
+To address the high dimensionality of the dataset and improve model performance, feature selection techniques were applied. The methods used include:
+
+1. **Recursive Feature Elimination (RFE)**:
+   - This method iteratively removes less important features based on their impact on model performance.
+   - The number of features selected was varied from 1 to the total number of features, and the **accuracy** was evaluated for each selection.
+
+2. **Mutual Information**:
+   - This method quantifies the dependency between each feature and the target variable.
+   - Features with higher mutual information scores are considered more relevant to the classification task.
+
+### Results and Analysis
+
+1. **Recursive Feature Elimination (RFE)**:
+   - The accuracy plot below shows the model performance as the number of selected features increases:
+   
+   ![RFE Accuracy](results/feature_accuracy.png)
+   
+   - Key observations:
+     - The accuracy increased significantly as the number of selected features increased up to **9 features**, reaching a maximum of **0.87**.
+     - After this point, the accuracy plateaued, suggesting that additional features beyond the top 9 provided diminishing returns.
+     - The model with **12 features** was tested on the test set, achieving an accuracy of **84.52%**.
+
+2. **Mutual Information**:
+   - The plot below ranks the features based on their mutual information scores:
+   
+   ![Mutual Information](results/feature_mutual_information.png)
+   
+   - Key observations:
+     - Features such as **"Curricular units 2nd sem (approved)"**, **"Curricular units 2nd sem (grade)"**, and **"Curricular units 1st sem (grade)"** were the most informative, indicating their strong correlation with the target variable.
+     - Features with low mutual information scores (e.g., **"Inflation rate"**, **"Educational special needs"**) were less relevant.
+
+   - Using the top **9 features** ranked by mutual information, the model achieved an accuracy of **0.87**, similar to the RFE results.
+
+3. **Comparison of Model Performance**:
+   - The table below compares the accuracy with and without feature selection:
+   
+   | Method                  | Number of Features | Accuracy (%) |
+   |-------------------------|--------------------|--------------|
+   | Without Feature Selection | 34                 | 84.52        |
+   | RFE (Top 12 Features)    | 12                 | 84.52        |
+   | Mutual Information (Top 9 Features) | 9          | 87.00        |
+   
+   - Feature selection did not significantly improve accuracy but reduced dimensionality.
+
+### Insights
+
+- Feature selection identified the most relevant features for the classification task, reducing dimensionality while maintaining or slightly improving model performance.
+- The **top features** (e.g., **"Curricular units"**, **"Tuition fees"**, and **"Application order"**) are directly related to student progress and enrollment, aligning with the domain knowledge of student dropout prediction.
+- Despite overlapping results, mutual information provided a clearer ranking of features, which can guide future model refinement.
 
 
 > See [5_feature_selection.ipynb](./5_feature_selection.ipynb) for feature selection results.
