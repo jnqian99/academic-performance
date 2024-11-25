@@ -429,8 +429,9 @@ EDA provided comprehensive insights into the dataset:
 
 Preprocessing ensures data quality for reliable analysis and modeling. Key steps included:
 - **Missing Value Handling**: During EDA, it was observed that all missing values had already been handled in the original data by replacing them with placeholders such as "Unknown" or "(blank)".
-- **Encoding**: Categorical features were label-encoded (low cardinality) or one-hot encoded (high cardinality, e.g., Nationality).
-- **Normalization**: Numerical academic features were normalized to facilitate clustering and improve model performance.
+-  **Feature Reduction**: We decided to drop 'Gender' feature to avoid potential discrimination. And also 'Nationality' feature is dropped. During EDA, this feature and 'International' feature showed high positive correlation. The number of Portuguese student is 4314 which is same as the number who is not international.
+- **Encoding**: Categorical features were one-hot encoded and the number of features increased from 34 to 217.
+- **Normalization**: Numerical academic features were normalized using StandardScaler() to facilitate clustering and improve model performance.
 
 
 > Refer to [1_preprocess.ipynb](./1_preprocess.ipynb) for code and results.
