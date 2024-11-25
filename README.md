@@ -53,15 +53,17 @@ EDA provided insight into feature distributions and relationships:
 
 
 Unsupervised clustering explored potential groupings of students:
-- **KMeans Clustering**: 
-    ### Methodology and Results
-    To determine the optimal number of clusters (`k`), we calculated the **Silhouette Score** for values of `k` ranging from 2 to 10. As shown in the plot below, the highest Silhouette Score was achieved at `k=3`. This value was selected as the optimal number of clusters.
+- ### KMeans Clustering: 
+    #### Methodology and Results
+    To determine the optimal number of clusters (`k`), we calculated the **Silhouette Score** for values of `k` ranging from 2 to 10. As shown in the plot below, the highest Silhouette Score was achieved at `k=3`. However, since the **Silhouette Score** for `k=2` and `k=3` are very close  (less than 0.03 difference), **domain knowledge** and the specific problem context should play a significant role in selecting the optimal number of clusters. In this case, since the problem is binary (e.g., “dropout” vs. “not dropout”), using `k=2` might align better with the data’s underlying structure.
     
-    For k=4 and beyond, the Silhouette Score dropped significantly to some very low value (~0.09) suggests that the clusters become less meaningful, possibly due to splitting existing clusters or introducing noise. The Silhouette Score supports the choice of k=3 as the optimal number of clusters. However, the relatively low overall scores (maximum ~0.25) suggest that the dataset does not form highly distinct clusters, which might result from overlapping features or noise.
+    For k=4 and beyond, the Silhouette Score dropped significantly to some very low value (~0.09) suggests that the clusters become less meaningful, possibly due to splitting existing clusters or introducing noise. Overall, the relatively low scores (maximum ~0.25) suggest that the dataset does not form highly distinct clusters, which might result from overlapping features or noise.
+
+    **We chose k = 2 as the optimal number of clusters of Kmeans.**
 
     ![Silhouette Score](results/clustering_silhouette_kmeans.png)
 
-    After selecting `k=3`, we applied K-Means clustering to the dataset. To visualize the clusters, we reduced the data to **3** dimensions using **Principal Component Analysis (PCA)**. The resulting clusters are displayed in the 3D scatter plot below. Each color represents a distinct cluster.
+    After selecting `k=2`, we applied K-Means clustering to the dataset. To visualize the clusters, we reduced the data to **3** dimensions using **Principal Component Analysis (PCA)**. The resulting clusters are displayed in the 3D scatter plot below. Each color represents a distinct cluster.
 
     ![K-Means Clustering](results/clustering_3d_kmeans.png)
 
@@ -74,15 +76,48 @@ Unsupervised clustering explored potential groupings of students:
 
     ![Target vs. Clusters](results/clustering_3d_target_kmeans.png)
 
-    ### Insights
-    1. **Optimal Clustering**:
-    - The results suggest that K-Means with `k=3` effectively groups students into meaningful clusters, likely representing at-risk students, average performers, and high achievers.
-
-    2. **Cluster Interpretation**:
+    #### Insights
+    - The results suggest that K-Means with `k=2` groups students into clusters, likely representing at-risk students, and average performers.
     - The overlap between clusters and target labels suggests the clusters capture general groupings but do not well align with the true outcomes. This indicates potential for further refinement, such as using additional clustering methods or improving feature engineering.
 
-- **Agglomerative Clustering**: Validated KMeans findings, supporting early indications of distinct student subgroups.
-- **PCA Visualization**: 2D and 3D visualizations using PCA showed partial separation, suggesting clustering alone may not capture dropout risk fully.
+- ### Hierarchical Clustering: 
+
+    #### Methodology and Results
+
+    To determine the optimal number of clusters (`k`), we calculated the **Silhouette Score** for values of `k` ranging from 2 to 10 using Agglomerative Clustering (Hierarchical Clustering). The plot below displays the **Silhouette Scores** for different values of `k`:
+
+    ![Silhouette Score](results/clustering_silhouette_hiera.png)
+
+    - The highest **Silhouette Score** of **0.23** was observed at **k=4**.
+    - Scores for **k=2** and **k=3** were also relatively high, which aligns with the binary nature of the dataset (dropout vs. not dropout).
+    - Beyond `k=4`, the scores drop significantly, indicating that higher cluster values might introduce noise or split meaningful groupings.
+
+    After selecting **k=4**, Hierarchical Clustering was applied to the dataset. The data was reduced to **3 dimensions** using **Principal Component Analysis (PCA)** for visualization. Two 3D scatter plots were generated to display the clusters from different viewpoints:
+
+    ![Hierarchical Clustering](results/clustering_3d_hiera.png)
+
+    #### Insights
+
+    The 3D scatter plots reveal the following:
+    1. Four distinct clusters are visible, with varying densities and overlaps.
+    2. Overlaps between clusters suggest some complexity in the dataset that hierarchical clustering struggles to fully separate.
+    3. Comparing these clusters with true labels (dropout vs. not dropout) reveals that while some alignment exists, significant overlaps remain.
+
+    To analyze the relationship between clusters and the actual target labels, the clusters were visualized with true labels in a separate plot:
+
+    ![Clusters and True Labels](results/clustering_3d_target_agg.png)
+
+    #### Observations
+    1. **Binary Nature of the Dataset**: While `k=4` maximized the Silhouette Score, using **k=2** might better align with the binary classification of dropout vs. not dropout.
+    2. **Granularity**: Higher values of `k` (e.g., `k=4`) provide a more granular view but might introduce noise or split meaningful groupings.
+    3. **Alignment with True Labels**: Overlaps between clusters and true labels suggest that hierarchical clustering captures general groupings but does not fully separate the classes.
+
+    #### Conclusion
+    - **Best k**: While **k=4** achieves the highest Silhouette Score, **k=2** aligns better with the binary nature of the dataset and simplifies interpretation.
+    - **Clustering Quality**: Hierarchical clustering provides moderate separation, but overlaps suggest the need for feature engineering or alternative clustering methods.
+    - **Future Directions**: Refining features or experimenting with different distance metrics may improve clustering performance.
+
+- **DBSCAN**: 
 
 
 > Refer to [3_cluster.ipynb](./3_cluster.ipynb) for detailed clustering steps and visuals.
