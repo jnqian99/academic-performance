@@ -399,7 +399,7 @@ EDA provided comprehensive insights into the dataset:
 
   ![EDA Target Distribution](results/eda_dist_target.png)
 
-  The original target variable consists of three categories: Dropout, Graduate, and Enrolled. Since our focus is on predicting student dropout, it is converted to a binary form. From the analysis of the target variable, it showed that the distribution of Dropout is 32.12% and the distribution of Not Dropout is 67.88%. This indicates an imbalanced distribution and data augmentation is needed.
+  The original target variable consists of three categories: Dropout, Graduate, and Enrolled. Since our focus is on predicting student dropout, it is converted to a binary form. From the analysis of the target variable, it showed that the distribution of Dropout is 32.12% and the distribution of Not Dropout is 67.88%. This indicates an imbalanced distribution and data augmentation or class weight balancing is needed and we will use class weight balancing in the classification step.
 
   ![EDA Numerical Distribution](results/eda_dist_num.png)
 
