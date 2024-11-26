@@ -9,8 +9,15 @@ This project aims to predict student academic outcomes, focusing on identifying 
 
 ## Project Structure
 
+Directory Structure:
 
-This repository contains the following notebooks:
+- **data**  contains the dataset used in the project.
+
+- **notebooks**  contains the Jupyter notebooks for each step of the project.
+
+- **results**  contains the visualizations and results generated during the project.
+
+This repository notebooks folder contains the following notebooks:
 - **1_eda.ipynb**: Exploratory Data Analysis.
 - **2_preprocess.ipynb**: Data preprocessing.
 - **3_cluster.ipynb**: Clustering analysis.
