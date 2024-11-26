@@ -25,28 +25,416 @@ Each section in this README details the tasks, results, visualizations, and code
 ---
 
 
-## 1. Data Preprocessing
+## 1. Exploratory Data Analysis (EDA)
+
+
+The original dataset contains all numeric values, as categorical features have been mapped into numbers. For instance, the marital status was mapped as follows:
+| Numeric Value | Category          |
+|:-------------:|-------------------|
+| 1             | Single            |
+| 2             | Married           |
+| 3             | Widow             |
+| 4             | Divorced          |
+| 5             | Facto Union       |
+| 6             | Legally Separated |
+
+To make the data easier to interpret in visualizations, we converted these numeric values back to their string labels before plotting.
+
+EDA provided comprehensive insights into the dataset:
+- **Data Overview**: To get basic information about the dataset, the table below provides an overview of the dataset including feature names, data type, number of missing values, number of unique values and summary of statistics for numerical features:
+<table><thead>
+  <tr>
+    <th>Feature Name</th>
+    <th>Data Type</th>
+    <th>Number of Missing values</th>
+    <th>Number of Unique Values</th>
+    <th colspan="3">Summary Statistics</th>
+  </tr></thead>
+<tbody>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>Min</td>
+    <td>Mean</td>
+    <td>Max</td>
+  </tr>
+  <tr>
+    <td>Marital status</td>
+    <td>category</td>
+    <td>0</td>
+    <td>6</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Application mode</td>
+    <td>category</td>
+    <td>0</td>
+    <td>18</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Application order</td>
+    <td>ordinal</td>
+    <td>0</td>
+    <td>8</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Course</td>
+    <td>category</td>
+    <td>0</td>
+    <td>17</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Daytime/evening attendance</td>
+    <td>bool</td>
+    <td>0</td>
+    <td>2</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Previous qualification</td>
+    <td>category</td>
+    <td>0</td>
+    <td>17</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Previous qualification (grade)</td>
+    <td>continuous</td>
+    <td>0</td>
+    <td>101</td>
+    <td>95</td>
+    <td>132.61</td>
+    <td>190</td>
+  </tr>
+  <tr>
+    <td>Nationality</td>
+    <td>category</td>
+    <td>0</td>
+    <td>21</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Mother's qualification</td>
+    <td>category</td>
+    <td>0</td>
+    <td>29</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Father's qualification</td>
+    <td>category</td>
+    <td>0</td>
+    <td>34</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Mother's occupation</td>
+    <td>category</td>
+    <td>0</td>
+    <td>32</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Father's occupation</td>
+    <td>category</td>
+    <td>0</td>
+    <td>46</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Admission grade</td>
+    <td>continuous</td>
+    <td>0</td>
+    <td>620</td>
+    <td>95</td>
+    <td>126.98</td>
+    <td>190</td>
+  </tr>
+  <tr>
+    <td>Displaced</td>
+    <td>bool</td>
+    <td>0</td>
+    <td>2</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Educational special needs</td>
+    <td>bool</td>
+    <td>0</td>
+    <td>2</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Debtor</td>
+    <td>bool</td>
+    <td>0</td>
+    <td>2</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Tuition fees up to date</td>
+    <td>bool</td>
+    <td>0</td>
+    <td>2</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Gender</td>
+    <td>bool</td>
+    <td>0</td>
+    <td>2</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Scholarship holder</td>
+    <td>bool</td>
+    <td>0</td>
+    <td>2</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Age at enrollment</td>
+    <td>int</td>
+    <td>0</td>
+    <td>46</td>
+    <td>17</td>
+    <td>23.265</td>
+    <td>70</td>
+  </tr>
+  <tr>
+    <td>International</td>
+    <td>category</td>
+    <td>0</td>
+    <td>2</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Curricular units 1st sem (credited)</td>
+    <td>int</td>
+    <td>0</td>
+    <td>21</td>
+    <td>0</td>
+    <td>0.7100</td>
+    <td>20</td>
+  </tr>
+  <tr>
+    <td>Curricular units 1st sem (enrolled)</td>
+    <td>int</td>
+    <td>0</td>
+    <td>23</td>
+    <td>0</td>
+    <td>6.2706</td>
+    <td>26</td>
+  </tr>
+  <tr>
+    <td>Curricular units 1st sem (evaluations)</td>
+    <td>int</td>
+    <td>0</td>
+    <td>35</td>
+    <td>0</td>
+    <td>8.2991</td>
+    <td>45</td>
+  </tr>
+  <tr>
+    <td>Curricular units 1st sem (approved)</td>
+    <td>int</td>
+    <td>0</td>
+    <td>23</td>
+    <td>0</td>
+    <td>4.7066</td>
+    <td>26</td>
+  </tr>
+  <tr>
+    <td>Curricular units 1st sem (grade)</td>
+    <td>continuous</td>
+    <td>0</td>
+    <td>805</td>
+    <td>0</td>
+    <td>10.641</td>
+    <td>18.875</td>
+  </tr>
+  <tr>
+    <td>Curricular units 1st sem (without evaluations)</td>
+    <td>int</td>
+    <td>0</td>
+    <td>11</td>
+    <td>0</td>
+    <td>0.1377</td>
+    <td>12</td>
+  </tr>
+  <tr>
+    <td>Curricular units 2nd sem (credited)</td>
+    <td>int</td>
+    <td>0</td>
+    <td>19</td>
+    <td>0</td>
+    <td>0.5418</td>
+    <td>19</td>
+  </tr>
+  <tr>
+    <td>Curricular units 2nd sem (enrolled)</td>
+    <td>int</td>
+    <td>0</td>
+    <td>22</td>
+    <td>0</td>
+    <td>6.2321</td>
+    <td>23</td>
+  </tr>
+  <tr>
+    <td>Curricular units 2nd sem (evaluations)</td>
+    <td>int</td>
+    <td>0</td>
+    <td>30</td>
+    <td>0</td>
+    <td>8.0633</td>
+    <td>33</td>
+  </tr>
+  <tr>
+    <td>Curricular units 2nd sem (approved)</td>
+    <td>int</td>
+    <td>0</td>
+    <td>20</td>
+    <td>0</td>
+    <td>4.4358</td>
+    <td>20</td>
+  </tr>
+  <tr>
+    <td>Curricular units 2nd sem (grade)</td>
+    <td>continuous</td>
+    <td>0</td>
+    <td>786</td>
+    <td>0</td>
+    <td>10.230</td>
+    <td>18.571</td>
+  </tr>
+  <tr>
+    <td>Curricular units 2nd sem (without evaluations)</td>
+    <td>int</td>
+    <td>0</td>
+    <td>10</td>
+    <td>0</td>
+    <td>0.1503</td>
+    <td>12</td>
+  </tr>
+  <tr>
+    <td>Unemployment rate</td>
+    <td>continuous</td>
+    <td>0</td>
+    <td>10</td>
+    <td>7.6</td>
+    <td>11.566</td>
+    <td>16.2</td>
+  </tr>
+  <tr>
+    <td>Inflation rate</td>
+    <td>continuous</td>
+    <td>0</td>
+    <td>9</td>
+    <td>-0.8</td>
+    <td>1.2280</td>
+    <td>3.7</td>
+  </tr>
+  <tr>
+    <td>GDP</td>
+    <td>continuous</td>
+    <td>0</td>
+    <td>10</td>
+    <td>-4.06</td>
+    <td>0.0020</td>
+    <td>3.51</td>
+  </tr>
+  <tr>
+    <td>Target</td>
+    <td>category</td>
+    <td>0</td>
+    <td>3</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</tbody></table>
+
+- **Distribution Analysis**: Using distribution analysis, we could understand how to handle the dataset during preprocess. For example, we can identify features with skewed distribution and notice these features need data transformation. To focus the analysis, target variable, a numerical feature and a categorical feature are selected for visulaization.
+
+  ![EDA Target Distribution](results/eda_dist_target.png)
+
+  The original target variable consists of three categories: Dropout, Graduate, and Enrolled. Since our focus is on predicting student dropout, it is converted to a binary form. From the analysis of the target variable, it showed that the distribution of Dropout is 32.12% and the distribution of Not Dropout is 67.88%. This indicates an imbalanced distribution and data augmentation is needed.
+
+  ![EDA Numerical Distribution](results/eda_dist_num.png)
+
+  The distribution of this feature shows that many students got 0 for the grade. It is negative skewed and this can be handeled by normalization.
+
+  ![EDA Categorical Distribution](results/eda_dist_cat.png)
+
+  The distribution shows a significant imbalance between categories which reflects the real-world situation. 
+
+- **Correlation of Features with Target**: To understand the relationship between the features and the target variable, we computed the correlation of each feature with the target. For numerical features, we used the point-biserial correlation coefficient and for categorical features, we used Cramer's V.
+
+    ![EDA Correlation with Target](results/eda_corr_target.png)
+
+    Academic features, such as grades and approved units, showed strong correlations with student outcomes.
+
+- **Correlation among Features**: To understand the relationships between the features, we calculated the pairwise correlation. For numerical-numerical features pair, we used Pearson's correlation, for categorical-categorical features pair, we used Cramer's V and for numerical-categorical features pair, we converted categorical feature into binary form and used point-biserial.
+
+    ![EDA Correlation among Features](results/eda_corr_features.png)
+
+    'Course' and 'Daytime/evening attendance' pair and 'Nationality' and 'International' pair show very high positive correlation. Also it shows that academic features are strongly associated.
+
+> See [2_eda.ipynb](./2_eda.ipynb) for visualizations and analysis.
+
+
+## 2. Data Preprocessing
 
 
 Preprocessing ensures data quality for reliable analysis and modeling. Key steps included:
-- **Missing Value Handling**: Imputation of numerical values with medians and filling categorical values with placeholders.
-- **Encoding**: Categorical features were label-encoded (low cardinality) or one-hot encoded (high cardinality, e.g., Nationality).
-- **Normalization**: Numerical academic features were normalized to facilitate clustering and improve model performance.
+- **Missing Value Handling**: During EDA, it was observed that all missing values had already been handled in the original data by replacing them with placeholders such as "Unknown" or "(blank)".
+-  **Feature Reduction**: We decided to drop 'Gender' feature to avoid potential discrimination. And also 'Nationality' feature is dropped. During EDA, this feature and 'International' feature showed high positive correlation. The number of Portuguese student is 4314 which is same as the number who is not international.
+- **Encoding**: Categorical features were one-hot encoded and the number of features increased from 34 to 217.
+- **Normalization**: Numerical academic features were normalized using StandardScaler() to facilitate clustering and improve model performance.
 
 
 > Refer to [1_preprocess.ipynb](./1_preprocess.ipynb) for code and results.
-
-
-## 2. Exploratory Data Analysis (EDA)
-
-
-EDA provided insight into feature distributions and relationships:
-- **Summary Statistics**: Distribution analysis revealed skewness in grades and enrollment status, suggesting early intervention opportunities.
-- **Correlation Heatmap**: Academic features, such as grades and credited units, showed strong correlations with student outcomes.
-- **Cluster Patterns**: Initial analysis revealed separable groups based on academic performance, hinting at distinct student types.
-
-
-> See [2_eda.ipynb](./2_eda.ipynb) for visualizations and analysis.
 
 
 ## 3. Clustering
