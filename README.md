@@ -608,55 +608,62 @@ To address the high dimensionality of the dataset and improve model performance,
 
 1. **Recursive Feature Elimination (RFE)**:
    - This method iteratively removes less important features based on their impact on model performance.
-   - The number of features selected was varied from 1 to the total number of features, and the **accuracy** was evaluated for each selection.
+   - The number of features selected was varied from 1 to the total number of features, and the **accuracy** and **execution time** were evaluated for each selection.
 
-2. **Mutual Information**:
+2. **Mutual Information (MI)**:
    - This method quantifies the dependency between each feature and the target variable.
    - Features with higher mutual information scores are considered more relevant to the classification task.
+   - The number of features selected was varied, and the **accuracy** and **execution time** were evaluated.
 
 ### Results and Analysis
 
-1. **Recursive Feature Elimination (RFE)**:
-   - The accuracy plot below shows the model performance as the number of selected features increases:
-   
-   ![RFE Accuracy](results/feature_accuracy.png)
-   
-   - Key observations:
-     - The accuracy increased significantly as the number of selected features increased up to **9 features**, reaching a maximum of **0.87**.
-     - After this point, the accuracy plateaued, suggesting that additional features beyond the top 9 provided diminishing returns.
-     - The model with **12 features** was tested on the test set, achieving an accuracy of **84.52%**.
+#### Recursive Feature Elimination (RFE)
 
-2. **Mutual Information**:
-   - The plot below ranks the features based on their mutual information scores:
-   
-   ![Mutual Information](results/feature_mutual_information.png)
-   
-   - Key observations:
-     - Features such as **"Curricular units 2nd sem (approved)"**, **"Curricular units 2nd sem (grade)"**, and **"Curricular units 1st sem (grade)"** were the most informative, indicating their strong correlation with the target variable.
-     - Features with low mutual information scores (e.g., **"Inflation rate"**, **"Educational special needs"**) were less relevant.
+The accuracy and execution time for RFE are shown in the plot below:
 
-   - Using the top **9 features** ranked by mutual information, the model achieved an accuracy of **0.87**, similar to the RFE results.
+![RFE Accuracy and Execution Time](results/feature_excution_accuracy.png)
 
-3. **Comparison of Model Performance**:
-   - The table below compares the accuracy with and without feature selection:
-   
-   | Method                  | Number of Features | Accuracy (%) |
-   |-------------------------|--------------------|--------------|
-   | Without Feature Selection | 34                 | 84.52        |
-   | RFE (Top 12 Features)    | 12                 | 84.52        |
-   | Mutual Information (Top 9 Features) | 9          | 87.00        |
-   
-   - Feature selection did not significantly improve accuracy but reduced dimensionality.
+- **Key Observations**:
+  - The accuracy increased significantly as the number of selected features increased up to **10 features**, after which it fluctuated slightly, showing only minor improvements.
+  - The accuracy eventually reached a maximum of around **0.87**.
+  - Execution time increased slightly with the number of features but did not vary significantly.
+  - The model with **10 features** after preperocess was tested on the test set, achieving an accuracy of **84.0%**.
 
-### Insights
+#### Mutual Information (MI)
+
+The mutual information scores for all features are visualized below:
+
+![Mutual Information](results/feature_mutual_information.png)
+
+![Mutual Information Accuracy and Execution Time](results/feature_excution_accuracy_mi.png)
+
+- **Key Observations**:
+  - Features such as **"Curricular units 2nd sem (approved)"**, **"Curricular units 2nd sem (grade)"**, and **"Curricular units 1st sem (grade)"** were the most informative, indicating their strong correlation with the target variable.
+  - Features with low mutual information scores (e.g., **"Inflation rate"**, **"Educational special needs"**) were less relevant.
+  - Using the top **9 features** ranked by mutual information, the model achieved a maximum accuracy of **0.87**, similar to the RFE results.
+  - Execution time for MI-based feature selection was slightly faster than RFE but followed a similar trend of minimal variation.
+
+#### Comparison of Model Performance
+
+The table below compares accuracy and execution time for models with and without feature selection:
+
+| Method                  | Number of Features | Accuracy (%) | Execution Time (sec) |
+|-------------------------|--------------------|--------------|-----------------------|
+| Without Feature Selection | 34                 | 84.52        | ~0.28                |
+| RFE (Top 10 Features)    | 10                 | 84.00        | ~0.27                |
+| MI (Top 9 Features)      | 9                  | 84.40        | ~0.26                |
+
+  - The accuracy differences are negligible, indicating that feature selection does not significantly improve model performance.
+  - The execution time differences are minimal, suggesting feature selection does not drastically reduce computational cost for this dataset.
+
+### Insights and Final Decision
 
 - Feature selection identified the most relevant features for the classification task, reducing dimensionality while maintaining or slightly improving model performance.
-- The **top features** (e.g., **"Curricular units"**, **"Tuition fees"**, and **"Application order"**) are directly related to student progress and enrollment, aligning with the domain knowledge of student dropout prediction.
-- Despite overlapping results, mutual information provided a clearer ranking of features, which can guide future model refinement.
+- The accuracy and execution time did not vary significantly across different feature subsets.
+- Given the minimal computational gain and the high interpretability of the original feature set, the decision was made to retain the **original features** for the final model.
+- Future work may explore advanced dimensionality reduction techniques or alternative models to further optimize performance and efficiency.
 
-
-> See [5_feature_selection.ipynb](./5_feature_selection.ipynb) for feature selection results.
-
+> See [5_feature_selection.ipynb](./5_feature_selection.ipynb) for detailed feature selection steps and results.
 
 ## 6. Classification
 
@@ -758,13 +765,28 @@ The actually not drop out student and predicted to be drop out (False Positive) 
 
 ## Conclusion and Future Work
 
-For classification, we used three classification models: Kernel SVM, Random Forest and k-NN. We used roc-auc as the scoring function for hyperparameter search and used recall as the primary measuring score for the final model. We also did a hyperparameter search for the threshold of decision probability to balance the recall and accuracy. Kernel SVM classifier did the best job in terms of overall performance. We can identify and thus help over 90% of the struggling students while not wasting too much aiding resources on non-struggling students (accuracy is 78.5%) using SVM. Random Forest classifier ranked the second and could identify over 89% of the struggling students. k-NN classifier ranked the third and could identify over 84% of the struggling students. 
-
-It is important to determine what scoring function to use in a data mining task and what kind of mistakes are the most costly and should be avoided. In this case, we want to avoid the False Negative mistakes as much as possible and thus we use recall as the primary score. To keep the accuracy in a reasonable range, we use roc-auc as the scoring function for hyperparameter search.
+This project explored a comprehensive workflow for predicting student academic outcomes, focusing on identifying at-risk students who may drop out. Through preprocessing, clustering, outlier detection, feature selection, and classification, the analysis provided meaningful insights into the dataset while evaluating the strengths and weaknesses of different methods.
 
 ### Key Findings
 
+1. **Data Characteristics**:
+   - The dataset contains overlapping features and noise, which made clustering less effective, as reflected by low Silhouette Scores across all methods.
+   - Academic features like grades and approved units were identified as the most relevant predictors for student outcomes, aligning with domain knowledge.
 
+2. **Clustering Performance**:
+   - Clustering methods struggled to provide meaningful separations due to overlapping features and noise.
+   - KMeans with `k=2` provided the most interpretable results but showed significant overlap with the true labels. DBSCAN struggled the most due to a dominant single cluster.
+
+3. **Feature Selection**:
+   - Recursive Feature Elimination (RFE) and Mutual Information (MI) methods identified the most relevant features while maintaining similar accuracy levels compared to using the full feature set.
+   - Feature selection slightly reduced execution time and dimensionality but did not lead to significant performance gains in classification.
+
+4. **Classification Models**:
+  - Three classification models—Kernel SVM, Random Forest, and k-NN—were evaluated with roc-auc used for hyperparameter tuning and recall prioritized to minimize False Negatives. Decision probability thresholds were optimized to balance recall and accuracy.
+   - **Kernel SVM** classifier did the best job in terms of overall performance. We can identify and thus help over **90%** of the struggling students while not wasting too much aiding resources on non-struggling students (accuracy is 78.5%) using SVM. **Random Forest** classifier ranked the second and could identify over **89%** of the struggling students. **k-NN** classifier ranked the third and could identify over 84% of the struggling students.
+
+5. **Key Metric Choice**:
+   - It is important to determine what scoring function to use in a data mining task and what kind of mistakes are the most costly and should be avoided. In this case, we want to avoid the False Negative mistakes as much as possible and thus we use recall as the primary score. To keep the accuracy in a reasonable range, we use roc-auc as the scoring function for hyperparameter search.
 
 ### Challenges and Limitations
 
