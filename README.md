@@ -428,7 +428,7 @@ EDA provided comprehensive insights into the dataset:
 
     'Course' and 'Daytime/evening attendance' pair and 'Nationality' and 'International' pair show very high positive correlation. Also it shows that academic features are strongly associated.
 
-> See [2_eda.ipynb](./2_eda.ipynb) for visualizations and analysis.
+> See [1_eda.ipynb](./1_eda.ipynb) for visualizations and analysis.
 
 
 ## 2. Data Preprocessing
@@ -438,10 +438,10 @@ Preprocessing ensures data quality for reliable analysis and modeling. Key steps
 - **Missing Value Handling**: During EDA, it was observed that all missing values had already been handled in the original data by replacing them with placeholders such as "Unknown" or "(blank)".
 -  **Feature Reduction**: We decided to drop 'Gender' feature to avoid potential discrimination. And also 'Nationality' feature is dropped. During EDA, this feature and 'International' feature showed high positive correlation. The number of Portuguese student is 4314 which is same as the number who is not international.
 - **Encoding**: Categorical features were one-hot encoded and the number of features increased from 34 to 217.
-- **Normalization**: Numerical academic features were normalized using StandardScaler() to facilitate clustering and improve model performance.
+- **Normalization**: PowerTransformer was used to reduce skewness of some numerical features. For example, skewness of 'Curricular units 1st sem (approved)' is reduced from 0.77 to -0.04. Then all numerical features were standardized and normalized using StandardScaler and MinMaxScaler to facilitate clustering and improve model performance.
 
 
-> Refer to [1_preprocess.ipynb](./1_preprocess.ipynb) for code and results.
+> Refer to [2_preprocess.ipynb](./2_preprocess.ipynb) for code and results.
 
 
 ## 3. Clustering
