@@ -436,10 +436,20 @@ EDA provided comprehensive insights into the dataset:
 
 Preprocessing ensures data quality for reliable analysis and modeling. Key steps included:
 - **Missing Value Handling**: During EDA, it was observed that all missing values had already been handled in the original data by replacing them with placeholders such as "Unknown" or "(blank)".
--  **Feature Reduction**: We decided to drop 'Gender' feature to avoid potential discrimination. And also 'Nationality' feature is dropped. During EDA, this feature and 'International' feature showed high positive correlation. The number of Portuguese student is 4314 which is same as the number who is not international.
+- **Feature Extraction**: Using 'Nationality', we transformed data to find which countries speak Portuguese. It turns out that only 0.8% of the students are from non Portuguese-speaking countries. Using academic features, we calculated success rate of each student.
+
+    ![Feature Extraction: Success rate](results/preprocess_fe_success_rate.png)
+
+  Since the features extracted doesn't show enough information, we decided not the add to the dataset.
+  
+- **Feature Reduction**: We decided to drop 'Gender' feature to avoid potential discrimination. And also 'Nationality' feature is dropped. During EDA, this feature and 'International' feature showed high positive correlation. The number of Portuguese student is 4314 which is same as the number who is not international.
 - **Encoding**: Categorical features were one-hot encoded and the number of features increased from 34 to 217.
 - **Normalization**: PowerTransformer was used to reduce skewness of some numerical features. For example, skewness of 'Curricular units 1st sem (approved)' is reduced from 0.77 to -0.04. Then all numerical features were standardized and normalized using StandardScaler and MinMaxScaler to facilitate clustering and improve model performance.
+- **Dimensionality Reduction**: Using PCA, we found that the first 69 components explains 95% of vaiance.
+  
+   ![Dimensionality Reduction: PCA](results/preprocess_pca.png)
 
+    We compared the classification accuracy of preprocessed dataset and PCA reduced dataset. The accuracy of preproceesed is 0.86 and the accuracy of PCA reduced dataset is 0.81. From this result, we used preprocessed dataset that is not reduced by PCA for further analysis.
 
 > Refer to [2_preprocess.ipynb](./2_preprocess.ipynb) for code and results.
 
